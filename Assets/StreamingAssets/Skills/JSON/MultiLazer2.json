@@ -1,0 +1,14 @@
+{
+    "Name": "MultiLazer2",
+    "Description": "Shoot an average lazer at each enemy",
+    "Cost": 20,
+    "User": {
+        "instanceID": 0
+    },
+    "SingleTarget": false,
+    "target": 2,
+    "e": 4,
+    "Auto": false,
+    "Power": 50,
+    "Category": "Lazer"
+}

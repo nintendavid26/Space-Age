@@ -1,0 +1,14 @@
+{
+    "Name": "MultiLazer",
+    "Description": "Shoot a weak lazer at each enemy",
+    "Cost": 10,
+    "User": {
+        "instanceID": 0
+    },
+    "SingleTarget": false,
+    "target": 2,
+    "e": 4,
+    "Auto": false,
+    "Power": 15,
+    "Category": "Lazer"
+}

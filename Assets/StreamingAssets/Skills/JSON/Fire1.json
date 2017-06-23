@@ -1,0 +1,14 @@
+{
+    "Name": "Fire1",
+    "Description": "A weak fire attack.",
+    "Cost": 5,
+    "User": {
+        "instanceID": 0
+    },
+    "SingleTarget": true,
+    "target": 2,
+    "e": 1,
+    "Auto": false,
+    "Power": 100,
+    "Category": "Fire"
+}

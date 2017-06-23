@@ -1,0 +1,14 @@
+{
+    "Name": "Ice3",
+    "Description": "A strong ice attack.",
+    "Cost": 20,
+    "User": {
+        "instanceID": 0
+    },
+    "SingleTarget": true,
+    "target": 2,
+    "e": 3,
+    "Auto": false,
+    "Power": 100,
+    "Category": "Ice"
+}
