@@ -28,8 +28,9 @@ public class SkillEditor: EditorWindow {
     void OnGUI()
     {
         EditorGUILayout.BeginHorizontal();
+        int prev = defaultPos;
         defaultPos=EditorGUILayout.Popup(defaultPos, Skills);
-        if (GUILayout.Button("Load")) {
+        if (prev != defaultPos) {
             LoadSkill(Skills[defaultPos]);
         }
         if (GUILayout.Button("Save"))
@@ -38,6 +39,13 @@ public class SkillEditor: EditorWindow {
             Skills = GetAllSkills();
 
         }
+
+        if (GUILayout.Button("Delete"))
+        {
+            Delete(Skills[defaultPos]);
+
+        }
+
         if (GUILayout.Button("New Skill"))
         {
             Skill=new BattleSkill();
@@ -110,6 +118,16 @@ public class SkillEditor: EditorWindow {
         Skills = GetAllSkills();
         LoadSkill(Skills[0]);
 
+
+
+    }
+
+    void Delete(string skill)
+    {
+        File.Delete(Application.streamingAssetsPath + "/Skills/LUA/" + skill + ".lua");
+        File.Delete(Application.streamingAssetsPath + "/Skills/JSON/" + skill + ".json");
+        Skills = GetAllSkills();
+        LoadSkill(Skills[0]);
 
 
     }

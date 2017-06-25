@@ -53,5 +53,10 @@ namespace Battle
             BattleController.Controller.Rewards.Add(reward);
 
         }
+
+        public void AdjustStatsToLevel()
+        {
+
+        }
     }
 }

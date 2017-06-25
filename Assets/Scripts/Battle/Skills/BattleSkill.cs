@@ -35,8 +35,8 @@ namespace Battle
         public int CalculateDamage(Ship User,Ship Target)
         {
             int dmg = 0;
-            dmg = 2 * (User.stats.atk+Power) - Target.stats.def;
-            int netLuck =1+User.stats.luck - Target.stats.luck;
+            dmg = 2 * (User.stats["Atk",true]+Power) - Target.stats["Def",true];
+            int netLuck =1+User.stats["Luck",true] - Target.stats["Luck",true];
             netLuck = Mathf.Clamp(netLuck,1,95);//Should  be from 1 to 95
             double crit = UnityEngine.Random.Range(1, 100)<=netLuck?1.5:1;
 

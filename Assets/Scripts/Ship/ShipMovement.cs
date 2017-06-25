@@ -64,7 +64,7 @@ namespace Overworld
 
         public virtual void Shoot()
         {
-            if (ship.stats.fuel == 0||!ShipCanMove) { return; }
+            if (ship.stats["Fuel",false] == 0||!ShipCanMove) { return; }
             Bullet newBullet = Instantiate(bullet, transform.position, transform.rotation);
             newBullet.ShotFrom = this;
             

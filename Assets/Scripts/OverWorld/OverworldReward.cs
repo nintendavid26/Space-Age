@@ -23,7 +23,7 @@ namespace Overworld
             {
                 if (type == Type.HP)
                 {
-                    PlayerShipMovement.Player.ship.GetHP(amnt);
+                    PlayerShipMovement.Player.ship.Heal(amnt);
 
                 }
                 else if (type == Type.Fuel)

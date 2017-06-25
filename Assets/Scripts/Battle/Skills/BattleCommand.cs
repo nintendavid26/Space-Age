@@ -31,7 +31,7 @@ namespace Battle
 
         public bool CanUse(Ship User)
         {
-            return User.stats.fuel >= Cost;
+            return User.stats["Fuel",false] >= Cost;
         }
 
         public abstract Ship[] ValidTargets(Ship User);

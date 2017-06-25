@@ -162,6 +162,7 @@ namespace Battle
             EnemyShips[2].transform.position = new Vector3(BattlePosition.x + 10, BattlePosition.y, BattlePosition.z + 10);
             PlayerShipMovement.Player.transform.rotation = Quaternion.identity;
             EnemyShips.ToList().ForEach(x => x.transform.eulerAngles = x.DefaultRot);
+            EnemyShips.ToList().ForEach(x => x.AdjustStatsToLevel());
             EnemyShips[0].GetComponent<EnemyShipMovement>().enabled = false;
             Camera.main.transform.position = CameraBattlePos;
             PlayerShips.ToList().ForEach(x => x.Enemies = EnemyShips);
@@ -169,7 +170,7 @@ namespace Battle
             PlayerShipMovement.Player.enabled = false;
             //Instantiate Party
             //Instantiate Enemies
-            AllShips = EnemyShips.Add<Ship>(PlayerShips).OrderBy(x => x.stats.speed).ToArray();
+            AllShips = EnemyShips.Add<Ship>(PlayerShips).OrderBy(x => x.stats["speed",true]).ToArray();
 
         }
 

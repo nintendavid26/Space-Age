@@ -1,0 +1,96 @@
+{
+    "stats": {
+        "StatNames": [
+            "HP",
+            "MaxHP",
+            "Fuel",
+            "MaxFuel",
+            "Atk",
+            "Def",
+            "Speed",
+            "Luck"
+        ],
+        "StatList": [
+            {
+                "Name": "HP",
+                "Base": 100,
+                "Modified": 100,
+                "Curve": []
+            },
+            {
+                "Name": "MaxHP",
+                "Base": 100,
+                "Modified": 100,
+                "Curve": []
+            },
+            {
+                "Name": "Fuel",
+                "Base": 100,
+                "Modified": 100,
+                "Curve": []
+            },
+            {
+                "Name": "MaxFuel",
+                "Base": 100,
+                "Modified": 100,
+                "Curve": []
+            },
+            {
+                "Name": "Atk",
+                "Base": 15,
+                "Modified": 15,
+                "Curve": []
+            },
+            {
+                "Name": "Def",
+                "Base": 10,
+                "Modified": 10,
+                "Curve": []
+            },
+            {
+                "Name": "Speed",
+                "Base": 10,
+                "Modified": 10,
+                "Curve": []
+            },
+            {
+                "Name": "Luck",
+                "Base": 10,
+                "Modified": 10,
+                "Curve": []
+            }
+        ]
+    },
+    "Name": "David",
+    "MaxItems": 0,
+    "Pilot": {
+        "instanceID": 0
+    },
+    "SkillStrings": [
+        "Fire1",
+        "Elec1"
+    ],
+    "KnownSkills": [],
+    "Enemies": [],
+    "Allies": [
+        {
+            "instanceID": 11136
+        },
+        {
+            "instanceID": 10792
+        },
+        {
+            "instanceID": 11194
+        }
+    ],
+    "DefaultRot": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0
+    },
+    "SkillTree": {
+        "instanceID": 10970
+    },
+    "MaxSkills": 3,
+    "CurrentSkills": []
+}

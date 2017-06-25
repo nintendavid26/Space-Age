@@ -122,15 +122,15 @@ namespace Overworld
         public override void Shoot()
         {
             base.Shoot();
-            ship.stats.fuel--;
+            ship.stats["fuel",false]--;
             UpdateUI();
             
         }
 
         public void UpdateUI()
         {
-            UI.FuelText.text = "Fuel " + ship.stats.fuel + "/" + ship.stats.maxFuel;
-            UI.Fuel.fillAmount = (float)ship.stats.fuel / ship.stats.maxFuel;
+            UI.FuelText.text = "Fuel " + ship.stats["Fuel",false] + "/" + ship.stats["MaxFuel",false];
+            UI.Fuel.fillAmount = (float)ship.stats["Fuel",false] / ship.stats["Fuel",false];
             UI.Money.text = "$" + Money;
         }
 

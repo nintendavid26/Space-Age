@@ -24,8 +24,8 @@ public class Attack : BattleCommand
         }
         User.transform.eulerAngles = User.DefaultRot;
         GameObject.Destroy(bullet);
-        int dmg = User.stats.atk-target.stats.def;
-        target.TakeDamage(User.stats.atk);
+        int dmg = User.stats["Atk",true]-target.stats["Def",true];
+        target.TakeDamage(User.stats["Atk",true]);
         target.MakeExplosion();
         BattleController.Controller.AnimationPlaying = false;
     }

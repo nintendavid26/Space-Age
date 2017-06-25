@@ -6,8 +6,6 @@ using Battle;
 using System.IO;
 using System;
 
-
-
 public static class SkillParser {
     static string path = "/Skills/LUA/";
     public static MonoBehaviour C=new MonoBehaviour();
@@ -49,6 +47,7 @@ public static class SkillParser {
         UserData.RegisterType<Vector3>();
         UserData.RegisterType<GameObject>();
         UserData.RegisterType<Time>();
+        UserData.RegisterType<LightningBolt>();
 
         //UserData.RegisterType<Debug>();
         Script script = new Script();

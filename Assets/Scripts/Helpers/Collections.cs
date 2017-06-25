@@ -6,6 +6,17 @@ using System;
 
 namespace Extensions.Collections
 {
+    public struct ListPair<T, S>
+    {
+        public List<T> l1;
+        public List<S> l2;
+
+        public ListPair(List<T> l1, List<S> l2) : this()
+        {
+            this.l1 = l1;
+            this.l2 = l2;
+        }
+    }
     public static class Collections
     {
         public static T[] Add<T>(this T Item,T[] other) {
@@ -52,6 +63,37 @@ namespace Extensions.Collections
             int r = UnityEngine.Random.Range(0, list.Count);
             return temp[r];
 
+        }
+
+        public static ListPair<T,S> ToLists<T, S>(this Dictionary<T, S> d, List<T> l1, List<S> l2)
+        {
+            l1 = new List<T>();
+            l2 = new List<S>();
+            foreach (KeyValuePair<T, S> pair in d)
+            {
+                l1.Add(pair.Key);
+                l2.Add(pair.Value);
+            }
+            return new ListPair<T, S>(l1, l2);
+
+        }
+        public static Dictionary<T,S> FromLists<T, S>(this Dictionary<T, S> d, List<T> l1, List<S> l2)
+        {
+            if (l1.Count != l2.Count)
+            {
+                throw new System.ArgumentException(
+                    "Error, both lists need to be the same length to convert to dictionary.\nList1 Count=" + l1.Count + " List2 Count=" + l2.Count);
+            }
+            if (l1.Count != l1.Distinct().Count())
+            {
+                throw new System.ArgumentException("Error, Can not create dictionary with duplicate keys");
+            }
+            d.Clear();
+            for (int i = 0; i < l1.Count; i++)
+            {
+                d.Add(l1[i], l2[i]);
+            }
+            return d;
         }
     }
        

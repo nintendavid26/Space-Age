@@ -1,0 +1,14 @@
+{
+    "Name": "Elec1",
+    "Description": "A weak electric attack",
+    "Cost": 5,
+    "User": {
+        "instanceID": 0
+    },
+    "SingleTarget": true,
+    "target": 2,
+    "e": 2,
+    "Auto": false,
+    "Power": 10,
+    "Category": "Electric"
+}

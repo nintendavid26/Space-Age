@@ -27,7 +27,7 @@ namespace Battle
 
         public IEnumerator TakeDamage(Ship S)
         {
-            S.TakeDamage(S.stats.maxHealth / 10);
+            S.TakeDamage(S.stats["MaxHealth",true] / 10);
             yield return null;
         }
 

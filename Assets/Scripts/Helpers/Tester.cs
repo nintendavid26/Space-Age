@@ -4,21 +4,44 @@ using UnityEngine;
 using Extensions.Coroutines;
 using MoonSharp.Interpreter;
 using System;
+using Overworld;
 
 public class Tester : MonoBehaviour {
 
-	
+    public Vector3 Target;
+    public Ingredient potionResult;
+
     void Start()
     {
         Debug.Log("Start");
-        StartCoroutine(MoonSharpTest());
-        //StartCoroutine(this.Sequence(CoroutineOne(), CoroutineTwo(), CoroutineThree(), CoroutineFour()));
+        //StartCoroutine(MoonSharpTest());
+
+
+        //MakeLightning();
         Debug.Log("End");
+
+
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            MakeLightning();
+        }
     }
 
     public void Click()
     {
         Debug.Log("click");
+    }
+
+    void MakeLightning()
+    {
+        LightningBolt bolt = BattlePrefabs.p.Make<LightningBolt>("Lightning", PlayerShipMovement.Player.transform.position);
+        bolt.Target = Target;
+        bolt.speed = 20;
+        bolt.Initialize(PlayerShipMovement.Player.transform.position, Target);
     }
 
     IEnumerator MoonSharpTest()
