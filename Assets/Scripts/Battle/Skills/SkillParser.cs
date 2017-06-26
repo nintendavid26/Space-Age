@@ -46,6 +46,7 @@ public static class SkillParser {
         UserData.RegisterType<Transform>();
         UserData.RegisterType<Vector3>();
         UserData.RegisterType<GameObject>();
+        UserData.RegisterType<Stats>();
         UserData.RegisterType<Time>();
         UserData.RegisterType<LightningBolt>();
 

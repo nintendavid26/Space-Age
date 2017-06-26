@@ -44,9 +44,7 @@ public class StatsWindow : EditorWindow
             EditorGUILayout.BeginHorizontal();
             stat.Name = EditorGUILayout.TextField(stat.Name);
             string name = stat.Name;
-
             stat.Base = EditorGUILayout.IntField(stat.Base);
-            stat.Modified = EditorGUILayout.IntField(stat.Modified);
             EditorGUILayout.EndHorizontal();
 
         }

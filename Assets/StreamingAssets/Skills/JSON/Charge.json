@@ -1,0 +1,14 @@
+{
+    "Name": "Charge",
+    "Description": "Triple your attack next turn.",
+    "Cost": 10,
+    "User": {
+        "instanceID": 0
+    },
+    "SingleTarget": true,
+    "target": 0,
+    "e": 4,
+    "Auto": false,
+    "Power": 0,
+    "Category": "Lazer"
+}

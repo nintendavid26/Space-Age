@@ -7,10 +7,14 @@ using System.IO;
 using UnityEditor;
 using UnityEngine;
 
-public enum op { add,sub,mult,div};
 
+
+/// <summary>
+/// Use PascalCase for all stat Names!!!
+/// </summary>
 [System.Serializable]
 public class Stats:System.Object {
+
 
     public Dictionary<string, Stat> stats;
     [HideInInspector]
@@ -21,7 +25,7 @@ public class Stats:System.Object {
 
     public void Remove(string s)
     {
-        stats.Remove(s.ToUpper());
+        stats.Remove(s);
     }
 
     public void Start()
@@ -53,7 +57,7 @@ public class Stats:System.Object {
 
     public int Get(Dictionary<string, int> d, string s)
     {
-        return d[s.ToUpper()];
+        return d[s];
     }
 
     public Stats()
@@ -75,7 +79,6 @@ public class Stats:System.Object {
     {
         get
         {
-            stat = stat.ToUpper();
             if (!stats.ContainsKey(stat))
             {
                 stats.Add(stat, new Stat(stat, 0));
@@ -99,7 +102,6 @@ public class Stats:System.Object {
     public int this[string stat,bool modified]
     {
         get {
-            stat = stat.ToUpper();
             if (!stats.ContainsKey(stat))
             {
                 stats.Add(stat, new Stat(stat,0));
@@ -115,7 +117,7 @@ public class Stats:System.Object {
             }
             if (modified)
             {
-                stats[stat].Modified = value;
+                stats[stat].Base = value;
             }
             else
             {
@@ -126,9 +128,9 @@ public class Stats:System.Object {
 
     public void ResetModified()
     {
-        foreach(KeyValuePair<string,Stat> kvp in stats)
+        foreach (Stat s in stats.Values)
         {
-            kvp.Value.Modified = kvp.Value.Base;
+            s.Buffs = new List<Stat.Buff>();
         }
     }
 
@@ -138,7 +140,20 @@ public class Stats:System.Object {
         stats["Health"].Base = stats["Health"].Base > stats["MaxHealth"].Base ? stats["MaxHealth"].Base : stats["Health"].Base;
     }
 
-    public void AddModifier(string stat,float amnt,op Op)
+    public void AddModifier(string stat,float amnt,op Op,int Duration)
+    {
+        
+    }
+
+    public void EndTurn()
+    {
+        foreach (Stat s in stats.Values)
+        {
+            s.TurnPasses();
+        }
+    }
+
+    public void RemoveModifier()
     {
 
     }

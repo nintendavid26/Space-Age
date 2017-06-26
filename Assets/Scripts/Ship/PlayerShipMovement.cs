@@ -122,7 +122,7 @@ namespace Overworld
         public override void Shoot()
         {
             base.Shoot();
-            ship.stats["fuel",false]--;
+            ship.stats["Fuel",false]--;
             UpdateUI();
             
         }

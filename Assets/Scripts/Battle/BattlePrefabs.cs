@@ -65,6 +65,13 @@ public class BattlePrefabs : MonoBehaviour {
         set { prefabs[s] = value; }
     }
 
+    public LightningBolt MakeBolt(Vector3 pos,Vector3 Target)
+    {
+        LightningBolt Bolt=Instantiate(prefabs["Lightning"], pos,Quaternion.identity).GetComponent<LightningBolt>();
+        Bolt.Initialize(pos,Target);
+        return Bolt;
+    }
+
     public void Log(string S)
     {
         Debug.Log("Lua: " + S);

@@ -8,22 +8,23 @@ public class LightningBolt : LightningBoltScript {
     public Vector3 Target;
     public Vector3 startPos;
     public float speed=1;
-    public float Wait = 0.25f;
+    public float WaitBeforeDestroying = 1f;
+    public bool Moving=true;
 
 
     protected override void Update()
     {
 
         base.Update();
-        if (Wait > 0)
+        Vector3 Desired = Vector3.MoveTowards(EndPosition, Target, Time.deltaTime * speed);
+        EndPosition = Desired;
+        if (EndPosition == Target)
         {
-            Wait -= Time.deltaTime;
-        }
-        else {
-            Vector3 Desired = Vector3.MoveTowards(EndPosition, Target, Time.deltaTime * speed);
-            EndPosition = Desired;
-            if (EndPosition == Target)
+            
+            WaitBeforeDestroying -= Time.deltaTime;
+            if (WaitBeforeDestroying <= 0)
             {
+                Moving = false;
                 Destroy(gameObject);
             }
         }
@@ -36,9 +37,7 @@ public class LightningBolt : LightningBoltScript {
         Target = target;
         StartObject = null;
         EndObject = null;
-        Debug.Log(Target);
-        Debug.Log(StartPosition);
-        Debug.Log(EndPosition);
+        Moving = true;
     }
 
 }

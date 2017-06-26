@@ -170,7 +170,7 @@ namespace Battle
             PlayerShipMovement.Player.enabled = false;
             //Instantiate Party
             //Instantiate Enemies
-            AllShips = EnemyShips.Add<Ship>(PlayerShips).OrderBy(x => x.stats["speed",true]).ToArray();
+            AllShips = EnemyShips.Add<Ship>(PlayerShips).OrderBy(x => x.stats["Speed",true]).ToArray();
 
         }
 
@@ -235,9 +235,7 @@ namespace Battle
 
                 }
             }
-
-
-
+    
         }
 
 

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Battle;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 //TODO Choose skill window occasionaly doesn't show up after using it a second time
 public class SkillContainer : MonoBehaviour
@@ -25,30 +26,42 @@ public class SkillContainer : MonoBehaviour
             Button B = Instantiate(button, grid.transform);
             B.transform.GetChild(0).GetComponent<Text>().text = skill.Name;
             B.transform.GetChild(1).GetComponent<Text>().text = skill.Cost+"";
-            B.onClick.AddListener(() => SetButton(j));
+            B.onClick.AddListener(() => OnClick(j));
             Buttons.Add(B);
         }
-        SetButton(0);
     }
 
-    public void SetButton(int i)
+
+    public void OnClick(int i)
     {
-        if (selected == i&& Ship.CurrentSkills[i].CanUse(Ship))
+        BattleController.Controller.SelectedCommand = Ship.CurrentSkills[i];
+        foreach (Button B in Buttons)
         {
-            BattleController.Controller.SelectedCommand = Ship.CurrentSkills[i];
-            foreach(Button B in Buttons)
-            {
-                Destroy(B.gameObject);
-            }
-            Buttons = new List<Button>();
-            gameObject.SetActive(false);
+            Destroy(B.gameObject);
         }
-        else
+        Buttons = new List<Button>();
+        gameObject.SetActive(false);
+    }
+
+    public void OnHover(int i)
+    {
+        selected = i;
+        BattleSkill skill = Ship.CurrentSkills[i];
+        Description.text = skill.Name + "  Fuel:" + skill.Cost + " " + skill.Description;
+    }
+
+    public class SkillButton : MonoBehaviour, IPointerEnterHandler
+    {
+
+
+
+        public void OnPointerEnter(PointerEventData eventData)
         {
+            /*
             selected = i;
             BattleSkill skill = Ship.CurrentSkills[i];
-            Description.text=skill.Name+"  Fuel:"+skill.Cost+" "+skill.Description;
-
+            Description.text = skill.Name + "  Fuel:" + skill.Cost + " " + skill.Description;
+            */
         }
     }
 }

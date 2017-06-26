@@ -10,13 +10,16 @@ namespace Battle
     [System.Serializable]
     public abstract class Ship : MonoBehaviour
     {
-        public Stats stats;
+        [HideInInspector]public Stats stats;
 
         public string Name;
         public int MaxItems;//Total or types?
         public Dictionary<string, int> Items;
         public Character Pilot;
+
+        //TODO Change inspector so that skills can only be added from a predetermined list
         public List<string> SkillStrings;
+
         [HideInInspector]public List<BattleSkill> KnownSkills=new List<BattleSkill>();
         [HideInInspector]public List<BattleCommand> KnownCommands = new List<BattleCommand>();
         public Element element = Element.None;
@@ -29,7 +32,7 @@ namespace Battle
         // Update is called once per frame
         public abstract IEnumerator GetCommand();
         public abstract IEnumerator GetTarget(BattleCommand bc);
-        public bool Alive() { return stats["health",false] > 0; }
+        public bool Alive() { return stats["Health",false] > 0; }
 
 
         public virtual void Start()
@@ -39,7 +42,8 @@ namespace Battle
                 KnownSkills.Add(BattleSkill.Skills[s]);
                 KnownCommands.Add(BattleSkill.Skills[s]);
             }
-            stats.Start();
+            FromJSON();
+            stats.FromJSON(this);
         }
 
         public void Heal(int amnt)
@@ -134,20 +138,24 @@ namespace Battle
         }
         public IEnumerator EndTurn()
         {
+            stats.EndTurn();
+
             if (EndOfTurn != null)
             {
                 yield return EndOfTurn(this);
             }
         }
 
-        public IEnumerator GetHit(Vector3 Direction,float power)//
+        public IEnumerator GetHit(Vector3 Direction,float power)
         {
            yield return null;
         }
 
         public Ship FromJSON()
         {
-            try {
+            /*
+            try
+            {
                 string FilePath = Application.streamingAssetsPath + "/Ships/" + Name + ".json";
                 string json = File.ReadAllText(FilePath);
                 try { JsonUtility.FromJsonOverwrite(json, this); }
@@ -160,16 +168,21 @@ namespace Battle
             {
                 File.Create(Application.streamingAssetsPath + "/Ships/" + Name + ".json");
             }
+            */
             stats = stats.FromJSON(this);
+            //Allies = allies;
             return this;
 
         }
         public void ToJSON()
         {
             stats.ToJSON(this);
+           
+            /*
             Debug.Log("Saved " + Name + " to json");
             string json = JsonUtility.ToJson(this, true);
             File.WriteAllText(Application.streamingAssetsPath + "/Ships/" + Name + ".json", json);
+            */
             
         }
 
