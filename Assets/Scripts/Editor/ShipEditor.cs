@@ -16,12 +16,12 @@ public class ShipEditor : Editor {
     {
         DrawDefaultInspector();
         Ship ship = (Ship)target;
-
+        
+        
         shouldShowStats = EditorGUILayout.Toggle("Stats",shouldShowStats);
-        if (!Loaded)
+        if (ship.stats==null||ship.stats.stats.Count==0)
         {
             ship.FromJSON();
-            Loaded = true;
         }
         if (shouldShowStats)
         {
@@ -43,12 +43,10 @@ public class ShipEditor : Editor {
         foreach (Stat stat in S.stats.StatTypes())
         {
             EditorGUILayout.BeginHorizontal();
-            if (GUILayout.Button("-"))
-            {
-                S.stats.Remove(stat.Name);
-            }
+            
             stat.Name = EditorGUILayout.TextField(stat.Name);
             stat.Base = EditorGUILayout.IntField(stat.Base);
+            EditorGUILayout.LabelField(stat.Modified+"");
             tempList.Add(stat);
             EditorGUILayout.EndHorizontal();
 

@@ -67,6 +67,7 @@ namespace Overworld
             if (ship.stats["Fuel",false] == 0||!ShipCanMove) { return; }
             Bullet newBullet = Instantiate(bullet, transform.position, transform.rotation);
             newBullet.ShotFrom = this;
+            this.PlaySound("Lazer",true,0.01f);
             
         }
         

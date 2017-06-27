@@ -8,6 +8,7 @@ using UnityEngine.UI;
 using Overworld;
 using Extensions.Coroutines;
 using System.IO;
+using Helper_Scripts;
 
 namespace Battle
 {
@@ -47,6 +48,21 @@ namespace Battle
 
         public void StartBattle(EnemyShip[] Enemies, Initiative i)
         {
+            switch (i)
+            {
+                case Initiative.Player:
+                    Music.ChangeSong(-1);
+                    break;
+                case Initiative.Enemy:
+                    Music.ChangeSong(-2);
+                    break;
+                case Initiative.Neutral:
+                    Music.ChangeSong(-3);
+                    break;
+                default:
+                    break;
+            }
+
             OverWorldUI.UI.gameObject.SetActive(false);
             BattleUI.UI.gameObject.SetActive(true);
             I = i;

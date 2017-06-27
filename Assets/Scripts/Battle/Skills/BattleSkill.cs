@@ -27,7 +27,6 @@ namespace Battle
 
         public override IEnumerator Do(Ship User, Ship[] Target)
         {
-            Debug.Log("Used "+Name);
             yield return SkillParser.UseEffect(this, "Use", User,Target);
              
         }
@@ -35,12 +34,13 @@ namespace Battle
         public int CalculateDamage(Ship User,Ship Target)
         {
             int dmg = 0;
-            dmg = 2 * (User.stats["Atk",true]+Power) - Target.stats["Def",true];
-            int netLuck =1+User.stats["Luck",true] - Target.stats["Luck",true];
+            dmg = 2 * (User.stats["Atk"].Modified+Power) - Target.stats["Def"].Modified;
+            Debug.Log("Target Modified Def=" + Target.stats["Def"].Modified);
+            int netLuck =1+User.stats["Luck"].Modified - Target.stats["Luck"].Modified;
             netLuck = Mathf.Clamp(netLuck,1,95);//Should  be from 1 to 95
             double crit = UnityEngine.Random.Range(1, 100)<=netLuck?1.5:1;
 
-            dmg = (int)(dmg * crit);
+            //dmg = (int)(dmg * crit);
             return dmg;
         }
 

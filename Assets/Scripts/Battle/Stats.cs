@@ -21,6 +21,12 @@ public class Stats:System.Object {
     public List<string> StatNames;
     [HideInInspector]
     public List<Stat> StatList;
+    public Dictionary<string, Color> StatsToColors = new Dictionary<string, Color> {
+        {"Atk",Color.red },
+        {"Def",Color.blue}
+    };
+    public Transform ship;
+
 
 
     public void Remove(string s)
@@ -63,7 +69,6 @@ public class Stats:System.Object {
     public Stats()
     {
         stats = new Dictionary<string, Stat>();
-        Set(new Stat("New", 0));
     }
 
     public List<string> Names()
@@ -126,12 +131,43 @@ public class Stats:System.Object {
         }
     }
 
-    public void ResetModified()
+    public void ResetBuffs()
     {
         foreach (Stat s in stats.Values)
         {
             s.Buffs = new List<Stat.Buff>();
         }
+    }
+
+    public void ResetBuffs(string StatName)
+    {
+        
+           stats[StatName].Buffs = new List<Stat.Buff>();
+    }
+
+    public void AddBuff(string stat, float amnt, op Op, int Duration)
+    {
+        stats[stat].AddBuff(new Stat.Buff(stat,amnt, Op, Duration,ship));
+
+
+    }
+
+    public void AddBuff(string stat, float amnt, string Op, int Duration)
+    {
+        op OP=op.mult;
+        switch (Op)
+        {
+           
+            case "*":
+                OP = op.mult;
+                break;
+            case "/":
+                OP = op.div;
+                break;
+            default:
+            break;
+        }
+        AddBuff(stat, amnt, OP, Duration);
     }
 
     public void Heal(int amnt)
@@ -140,10 +176,7 @@ public class Stats:System.Object {
         stats["Health"].Base = stats["Health"].Base > stats["MaxHealth"].Base ? stats["MaxHealth"].Base : stats["Health"].Base;
     }
 
-    public void AddModifier(string stat,float amnt,op Op,int Duration)
-    {
-        
-    }
+   
 
     public void EndTurn()
     {

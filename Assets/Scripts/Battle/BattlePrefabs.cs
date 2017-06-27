@@ -23,7 +23,6 @@ public class BattlePrefabs : MonoBehaviour {
     public void Awake()
     {
         p = this;
-
         for (int i = 0; i < objects.Length; i++)
         {
             prefabs.Add(objects[i].name, objects[i].Object);
@@ -44,7 +43,7 @@ public class BattlePrefabs : MonoBehaviour {
     public GameObject Make(string s,Vector3 pos){
         if (prefabs.ContainsKey(s))
         {
-            return Instantiate(prefabs[s], pos, Quaternion.identity);
+            return Instantiate(prefabs[s], pos, prefabs[s].transform.rotation);
         }
         return null;
     }
@@ -56,6 +55,32 @@ public class BattlePrefabs : MonoBehaviour {
         }
         return null;
     }
+
+    public GameObject Make(string s, Transform parent)
+    {
+        if (prefabs.ContainsKey(s))
+        {
+            return Instantiate(prefabs[s],parent.position, prefabs[s].transform.rotation,parent);
+        }
+        return null;
+    }
+
+    public ParticleSystem MakeParticles(string s, Transform parent)
+    {
+        Debug.Log(s);
+        if (prefabs.ContainsKey(s))
+        {
+            ParticleSystem x = Instantiate(prefabs[s], parent.position, prefabs[s].transform.rotation, parent).GetComponent<ParticleSystem>();
+            Debug.Log(x);
+            Debug.Log("No error");
+            return x;
+        }
+        else {
+            Debug.Log("Doesn't contain " + s);
+            return null;
+        }
+    }
+
     public GameObject Make(string s, Vector3 pos,Quaternion rot)
     {
         return Instantiate(prefabs[s], pos, rot);

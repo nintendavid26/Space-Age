@@ -14,10 +14,7 @@ public class Tester : MonoBehaviour {
     void Start()
     {
         Debug.Log("Start");
-        //StartCoroutine(MoonSharpTest());
-
-
-        //MakeLightning();
+        ChangeParticleColors();
         Debug.Log("End");
 
 
@@ -29,6 +26,13 @@ public class Tester : MonoBehaviour {
         {
             MakeLightning();
         }
+    }
+
+    void ChangeParticleColors()
+    {
+        GameObject P=BattlePrefabs.p.Make("Buff", transform);
+        ParticleSystem.MainModule main = P.GetComponent<ParticleSystem>().main;
+        main.startColor = Color.red;
     }
 
     public void Click()

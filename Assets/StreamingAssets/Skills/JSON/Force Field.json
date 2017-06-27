@@ -1,14 +1,14 @@
 {
-    "Name": "Charge",
-    "Description": "Triple your attack and reduce defense next turn.",
+    "Name": "Force Field",
+    "Description": "Triple your defense and reduce attack until next turn",
     "Cost": 10,
     "User": {
         "instanceID": 0
     },
     "SingleTarget": true,
     "target": 0,
-    "e": 4,
+    "e": 5,
     "Auto": false,
     "Power": 0,
-    "Category": "Lazer"
+    "Category": ""
 }

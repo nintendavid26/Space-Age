@@ -11,7 +11,7 @@ public class SkillContainer : MonoBehaviour
 {
     public Button button;
     public Text Description;
-    public List<Button> Buttons;
+    public List<SkillButton> Buttons;
     public int selected=-1;
     public PlayerShip Ship;
     public Image grid;
@@ -23,10 +23,12 @@ public class SkillContainer : MonoBehaviour
         {
             int j = i;
             BattleSkill skill = ship.CurrentSkills[i];
-            Button B = Instantiate(button, grid.transform);
+            SkillButton B = Instantiate(button, grid.transform).GetComponent<SkillButton>();
+            B.Container = this;
+            B.i = j;
             B.transform.GetChild(0).GetComponent<Text>().text = skill.Name;
             B.transform.GetChild(1).GetComponent<Text>().text = skill.Cost+"";
-            B.onClick.AddListener(() => OnClick(j));
+            B.button.onClick.AddListener(() => OnClick(j));
             Buttons.Add(B);
         }
     }
@@ -35,33 +37,15 @@ public class SkillContainer : MonoBehaviour
     public void OnClick(int i)
     {
         BattleController.Controller.SelectedCommand = Ship.CurrentSkills[i];
-        foreach (Button B in Buttons)
+        foreach (SkillButton B in Buttons)
         {
             Destroy(B.gameObject);
         }
-        Buttons = new List<Button>();
+        Buttons = new List<SkillButton>();
         gameObject.SetActive(false);
     }
 
-    public void OnHover(int i)
-    {
-        selected = i;
-        BattleSkill skill = Ship.CurrentSkills[i];
-        Description.text = skill.Name + "  Fuel:" + skill.Cost + " " + skill.Description;
-    }
+    
 
-    public class SkillButton : MonoBehaviour, IPointerEnterHandler
-    {
-
-
-
-        public void OnPointerEnter(PointerEventData eventData)
-        {
-            /*
-            selected = i;
-            BattleSkill skill = Ship.CurrentSkills[i];
-            Description.text = skill.Name + "  Fuel:" + skill.Cost + " " + skill.Description;
-            */
-        }
-    }
+    
 }

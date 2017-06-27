@@ -14,55 +14,46 @@
         {
             "Name": "Health",
             "Base": 100,
-            "Modified": 100,
             "Curve": []
         },
         {
             "Name": "MaxHealth",
             "Base": 100,
-            "Modified": 100,
             "Curve": []
         },
         {
             "Name": "Fuel",
             "Base": 100,
-            "Modified": 100,
             "Curve": []
         },
         {
             "Name": "MaxFuel",
             "Base": 100,
-            "Modified": 100,
             "Curve": []
         },
         {
             "Name": "Atk",
             "Base": 15,
-            "Modified": 15,
             "Curve": []
         },
         {
             "Name": "Def",
             "Base": 10,
-            "Modified": 10,
             "Curve": []
         },
         {
             "Name": "Speed",
             "Base": 10,
-            "Modified": 10,
             "Curve": []
         },
         {
             "Name": "Luck",
             "Base": 10,
-            "Modified": 10,
             "Curve": []
         },
         {
             "Name": "Level",
             "Base": 1,
-            "Modified": 1,
             "Curve": []
         }
     ]

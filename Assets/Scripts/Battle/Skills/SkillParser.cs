@@ -49,6 +49,8 @@ public static class SkillParser {
         UserData.RegisterType<Stats>();
         UserData.RegisterType<Time>();
         UserData.RegisterType<LightningBolt>();
+        UserData.RegisterType<SoundEffects>();
+        UserData.RegisterExtensionType(typeof(Audio));
 
         //UserData.RegisterType<Debug>();
         Script script = new Script();

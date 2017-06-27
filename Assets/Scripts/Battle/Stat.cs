@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-public enum op { mult, div, add, sub };
+public enum op { mult, div};
 
 [System.Serializable]
 public class Stat {
@@ -13,6 +13,40 @@ public class Stat {
         public float amnt;
         public op Op;
         public int Duration;
+        public string StatName;
+        public Transform ship;
+        public ParticleSystem Particles;
+
+        public Buff(string _StatName,float _amnt,op _Op,int _Duration,Transform _ship)
+        {
+            StatName = _StatName;
+            amnt = _amnt;
+            Op = _Op;
+            Duration = _Duration+1;//This is because for it to last the next turn it has to be set to 2 because it gets reduced each turn
+            ship = _ship;
+            Particles =MakeParticles();
+        }
+
+        ParticleSystem MakeParticles()
+        {
+            string debuff = Debuff() ? "DeBuff" : "Buff";
+            GameObject P = BattlePrefabs.p.Make(debuff, ship);
+            ParticleSystem.MainModule main = P.GetComponent<ParticleSystem>().main;
+            Color C = Color.white;
+            if (StatName == "Atk") { C = Color.red; }
+            else if (StatName == "Def") { C = Color.blue; }
+            main.startColor =C;
+            return P.GetComponent<ParticleSystem>();
+        }
+
+        public bool Debuff()
+        {
+            if ((amnt > 1 && Op == op.div) || (amnt < 1 && Op == op.mult))
+            {
+                return true;
+            }
+            else { return false; }
+        }
     }
 
     public string Name;
@@ -40,13 +74,19 @@ public class Stat {
             Buffs[i].Duration= Buffs[i].Duration-1;
             if (Buffs[i].Duration == 0)
             {
+                GameObject.Destroy(Buffs[i].Particles);
                 Buffs.RemoveAt(i);
             }
         }
     }
 
-    public void AddBuff() {
-
+    public void AddBuff(Buff buff) {
+        if (Buffs == null)
+        {
+            Buffs = new List<Buff>();
+        }
+        buff.StatName = Name;
+        Buffs.Add(buff);
     }
 
     public void RemoveBuff()
@@ -65,12 +105,7 @@ public class Stat {
         {
             switch (b.Op)
             {
-                case op.add:
-                    x = x + (int)b.amnt;
-                    break;
-                case op.sub:
-                    x = x - (int)b.amnt;
-                    break;
+                
                 case op.mult:
                     x = (int)(x * b.amnt);
                     break;
@@ -81,7 +116,6 @@ public class Stat {
                     break;
             }
         }
-
         return x;
     }
 }

@@ -44,6 +44,7 @@ namespace Battle
             }
             FromJSON();
             stats.FromJSON(this);
+            stats.ship = transform;
         }
 
         public void Heal(int amnt)
@@ -54,18 +55,17 @@ namespace Battle
         public void TakeDamage(int dmg)
         {
             stats.TakeDamage(dmg);
+            Debug.Log("Took " + dmg + ". HP=" + stats["Health"].Base);
             if (stats["Health",false] <= 0)
             {
                 Die();
             }
 
+
         }
-        /// <summary>
-        /// put the base last?
-        /// </summary>
         public virtual void Die()
         {
-            
+            this.PlaySound("Explosion",volume:0.1f);
             BattlePrefabs.p.Make("Big Explosion", transform.position);
             gameObject.SetActive(false);
         }
