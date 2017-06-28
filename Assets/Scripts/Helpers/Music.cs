@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Extensions.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -13,6 +14,11 @@ namespace Helper_Scripts
         public List<AudioClip> Songs;
 
         private static Music _instance = null;
+
+        public Dictionary<string, AudioClip> SongsDict;
+        public List<string> names, prevNames;
+        public bool Updated;
+        public float DefaultVolume;
 
 
         public static AudioSource Source
@@ -94,14 +100,15 @@ namespace Helper_Scripts
             Source.Play();
         }
 
-        public static void ChangeSong(int SongIndex)
+        public static void ChangeSong(string SongName)
         {
-            if (SongIndex < 0)
+            if (_instance.SongsDict == null)
             {
-                SongIndex = _instance.Songs.Count + SongIndex;
+                _instance.SongsDict = new Dictionary<string, AudioClip>();
+                _instance.SongsDict.FromLists(_instance.names, _instance.Songs);
             }
             Source.Stop();
-           _instance.CurrentSong = _instance.Songs[SongIndex];
+           _instance.CurrentSong = _instance.SongsDict[SongName];
             Source.loop = true;
             Source.clip =_instance.CurrentSong;
             Source.Play();

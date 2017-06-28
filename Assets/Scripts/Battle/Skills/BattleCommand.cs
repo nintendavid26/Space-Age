@@ -29,7 +29,7 @@ namespace Battle
            yield return Do(User, new Ship[] { Target });
         }
 
-        public bool CanUse(Ship User)
+        public virtual bool CanUse(Ship User)
         {
             return User.stats["Fuel",false] >= Cost;
         }

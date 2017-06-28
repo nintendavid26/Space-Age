@@ -19,17 +19,21 @@ public class SkillContainer : MonoBehaviour
     {
         Ship = ship;
         selected = -1;
-        for (int i=0;i<ship.CurrentSkills.Count; i++)
+        for (int i = 0; i < ship.CurrentSkills.Count; i++)
         {
             int j = i;
             BattleSkill skill = ship.CurrentSkills[i];
-            SkillButton B = Instantiate(button, grid.transform).GetComponent<SkillButton>();
-            B.Container = this;
-            B.i = j;
-            B.transform.GetChild(0).GetComponent<Text>().text = skill.Name;
-            B.transform.GetChild(1).GetComponent<Text>().text = skill.Cost+"";
-            B.button.onClick.AddListener(() => OnClick(j));
-            Buttons.Add(B);
+            if (skill.CanUse(ship))
+            {
+                SkillButton B = Instantiate(button, grid.transform).GetComponent<SkillButton>();
+                B.Container = this;
+                B.i = j;
+                B.transform.GetChild(0).GetComponent<Text>().text = skill.Name;
+                B.transform.GetChild(1).GetComponent<Text>().text = skill.Cost + "";
+                B.button.onClick.AddListener(() => OnClick(j));
+                Buttons.Add(B);
+
+            }
         }
     }
 

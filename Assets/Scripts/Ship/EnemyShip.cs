@@ -15,7 +15,7 @@ namespace Battle
         {
             public int ExpReward;
             public int MoneyReward;
-            public Item Reward;
+            public string Reward;
         }
         public Rewards reward;
         public override void Start()
@@ -57,7 +57,13 @@ namespace Battle
 
         public void AdjustStatsToLevel()
         {
+            for (int i = 1; i < stats["Level"].Base; i++)
+            {
+                foreach (Stat stat in stats.stats.Values) {
+                    stat.Base += stat.Base / 10;
+                }
 
+            }
         }
 
         

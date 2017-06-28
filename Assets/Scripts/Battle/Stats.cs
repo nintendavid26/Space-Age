@@ -25,7 +25,7 @@ public class Stats:System.Object {
         {"Atk",Color.red },
         {"Def",Color.blue}
     };
-    public Transform ship;
+    public Ship ship;
 
 
 
@@ -71,6 +71,15 @@ public class Stats:System.Object {
         stats = new Dictionary<string, Stat>();
     }
 
+    public void SetShip(Ship s)
+    {
+        ship = s;
+        foreach (Stat stat in stats.Values)
+        {
+            stat.ship = s;
+        }
+    }
+
     public List<string> Names()
     {
         return new List<string>(stats.Keys);
@@ -86,7 +95,7 @@ public class Stats:System.Object {
         {
             if (!stats.ContainsKey(stat))
             {
-                stats.Add(stat, new Stat(stat, 0));
+                stats.Add(stat, new Stat(stat, 0,ship));
             }
             return stats[stat];
         }
@@ -95,7 +104,7 @@ public class Stats:System.Object {
         {
             if (!stats.ContainsKey(stat))
             {
-                stats.Add(stat, new Stat(stat, 0));
+                stats.Add(stat, new Stat(stat, 0,ship));
             }
             else
             {
@@ -109,7 +118,7 @@ public class Stats:System.Object {
         get {
             if (!stats.ContainsKey(stat))
             {
-                stats.Add(stat, new Stat(stat,0));
+                stats.Add(stat, new Stat(stat,0,ship));
             }
             return modified?stats[stat].Modified:stats[stat].Base;
         }
@@ -118,7 +127,7 @@ public class Stats:System.Object {
         {
             if (!stats.ContainsKey(stat))
             {
-                stats.Add(stat, new Stat(stat,0));
+                stats.Add(stat, new Stat(stat,0,ship));
             }
             if (modified)
             {
@@ -145,29 +154,11 @@ public class Stats:System.Object {
            stats[StatName].Buffs = new List<Stat.Buff>();
     }
 
-    public void AddBuff(string stat, float amnt, op Op, int Duration)
+    public void AddBuff(string stat, int amnt, int Duration)
     {
-        stats[stat].AddBuff(new Stat.Buff(stat,amnt, Op, Duration,ship));
+        stats[stat].AddBuff(amnt,Duration);
 
 
-    }
-
-    public void AddBuff(string stat, float amnt, string Op, int Duration)
-    {
-        op OP=op.mult;
-        switch (Op)
-        {
-           
-            case "*":
-                OP = op.mult;
-                break;
-            case "/":
-                OP = op.div;
-                break;
-            default:
-            break;
-        }
-        AddBuff(stat, amnt, OP, Duration);
     }
 
     public void Heal(int amnt)

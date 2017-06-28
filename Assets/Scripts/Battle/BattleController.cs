@@ -51,13 +51,13 @@ namespace Battle
             switch (i)
             {
                 case Initiative.Player:
-                    Music.ChangeSong(-1);
+                    Music.ChangeSong("Player");
                     break;
                 case Initiative.Enemy:
-                    Music.ChangeSong(-2);
+                    Music.ChangeSong("Enemy");
                     break;
                 case Initiative.Neutral:
-                    Music.ChangeSong(-3);
+                    Music.ChangeSong("Neutral");
                     break;
                 default:
                     break;
@@ -144,9 +144,15 @@ namespace Battle
         private IEnumerator Win()
         {
             Debug.Log("Player Wins");
-            //BringUpRewardsScreen();
+            Music.ChangeSong("Victory");
+            BringUpRewardsScreen();
             //for(int i=0;i<Rewards.)
             yield return null;
+        }
+
+        private void BringUpRewardsScreen()
+        {
+            throw new NotImplementedException();
         }
 
         bool Alive(Ship[] Ships)
@@ -225,10 +231,12 @@ namespace Battle
             StartCoroutine(CurrentShip.GetTarget(SelectedCommand));
             yield return new WaitUntil(() => SelectedTarget != null); //I know this is kinda dumb
             yield return new WaitUntil(() => SelectedTarget.Length > 0); //will fix later
+
             StartCoroutine(SelectedCommand.Do(CurrentShip, SelectedTarget));
             yield return new WaitUntil(() => !AnimationPlaying);
             SelectedCommand = null;
             SelectedTarget = null;
+            if (s.GetComponent<EnemyShip>() != null) { yield return new WaitForSeconds(0.5f); }//TODO Make this be handled within 
             yield return StartCoroutine(s.EndTurn());
         }
 

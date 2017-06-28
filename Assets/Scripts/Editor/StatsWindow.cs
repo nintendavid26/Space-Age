@@ -8,7 +8,7 @@ public class StatsWindow : EditorWindow
 {
     public Ship ship;
     public Stats stats;
-    public List<string> StatNames=new List<string>();
+    public List<string> StatNames = new List<string>();
 
     public static void Init(Ship s)
     {
@@ -30,7 +30,8 @@ public class StatsWindow : EditorWindow
     {
         if (GUILayout.Button("Save"))
         {
-            foreach(string s in StatNames) {
+            foreach (string s in StatNames)
+            {
                 Debug.Log(s);
             }
         }
@@ -48,12 +49,6 @@ public class StatsWindow : EditorWindow
             EditorGUILayout.EndHorizontal();
 
         }
-
-        if (GUILayout.Button("+"))
-        {
-            stats.Set(new Stat("New", 0));
-        }
-
     }
 
 }

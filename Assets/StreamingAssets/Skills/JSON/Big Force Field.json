@@ -1,0 +1,14 @@
+{
+    "Name": "Big Force Field",
+    "Description": "Increase enture team's defense for 3 turns",
+    "Cost": 30,
+    "User": {
+        "instanceID": 0
+    },
+    "SingleTarget": false,
+    "target": 1,
+    "e": 4,
+    "Auto": false,
+    "Power": 0,
+    "Category": "Lazer"
+}

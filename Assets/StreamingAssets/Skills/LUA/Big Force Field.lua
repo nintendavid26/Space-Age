@@ -1,9 +1,9 @@
---Charge
+--Big Force Field
 function Use()
-    --TODO Destroy Charge
     Controller.AnimationPlaying=true
-    User.stats.AddBuff("Atk",3,1)
-    User.stats.AddBuff("Def",-3,1)
+    for i=0, #Targets-1 do
+        Targets[i].stats.AddBuff("Def",3,3)
+    end
     User.PlaySound("Buff",true,0.1)
     Controller.AnimationPlaying=false
 end

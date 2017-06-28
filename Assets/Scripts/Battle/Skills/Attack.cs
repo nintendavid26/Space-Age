@@ -35,7 +35,6 @@ public class Attack : BattleCommand
         {
             int dmg = 0;
             dmg = 2 * (User.stats["Atk"].Modified + 1) - Target.stats["Def"].Modified;
-            Debug.Log(dmg);
             int netLuck = 1 + User.stats["Luck"].Modified - Target.stats["Luck"].Modified;
             netLuck = Mathf.Clamp(netLuck, 1, 95);//Should  be from 1 to 95
             double crit = UnityEngine.Random.Range(1, 100) <= netLuck ? 1.5 : 1;

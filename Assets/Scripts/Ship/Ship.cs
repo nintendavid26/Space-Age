@@ -44,7 +44,7 @@ namespace Battle
             }
             FromJSON();
             stats.FromJSON(this);
-            stats.ship = transform;
+            stats.SetShip(this);
         }
 
         public void Heal(int amnt)
@@ -54,7 +54,9 @@ namespace Battle
 
         public void TakeDamage(int dmg)
         {
+            if (dmg < 0) { dmg = 0; }
             stats.TakeDamage(dmg);
+            
             Debug.Log("Took " + dmg + ". HP=" + stats["Health"].Base);
             if (stats["Health",false] <= 0)
             {

@@ -72,7 +72,7 @@ public class ShipEditor : Editor {
 
         if (GUILayout.Button("+"))
         {
-            S.stats.Set(new Stat("New", 0));
+            S.stats.Set(new Stat("New", 0,S));
         }
 
         if (GUILayout.Button("Clear"))

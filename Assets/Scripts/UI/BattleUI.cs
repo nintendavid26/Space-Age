@@ -88,7 +88,13 @@ namespace Battle
                 t.User = this.ship;
                 Button tb = t.GetComponent<Button>();
                 curTargets.Add(t);
+
             }
+            foreach(TargetUI T in curTargets)
+            {
+                T.CurTargets = curTargets;
+            }
+
 
         }
 

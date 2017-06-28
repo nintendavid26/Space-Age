@@ -27,15 +27,26 @@ namespace Battle
 
         public override IEnumerator Do(Ship User, Ship[] Target)
         {
+            User.stats["Fuel"].Base -= Cost;
             yield return SkillParser.UseEffect(this, "Use", User,Target);
+            
+            
              
+        }
+
+        public override bool CanUse(Ship User)
+        {
+            if (ValidTargets(User) == null) { return false; }
+            if (ValidTargets(User).Length == 0) { return false; }
+            if (User.stats["Fuel"].Base < Cost) { return false; }
+            return true;
+
         }
 
         public int CalculateDamage(Ship User,Ship Target)
         {
             int dmg = 0;
             dmg = 2 * (User.stats["Atk"].Modified+Power) - Target.stats["Def"].Modified;
-            Debug.Log("Target Modified Def=" + Target.stats["Def"].Modified);
             int netLuck =1+User.stats["Luck"].Modified - Target.stats["Luck"].Modified;
             netLuck = Mathf.Clamp(netLuck,1,95);//Should  be from 1 to 95
             double crit = UnityEngine.Random.Range(1, 100)<=netLuck?1.5:1;
