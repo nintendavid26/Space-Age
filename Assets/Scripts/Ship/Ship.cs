@@ -22,7 +22,7 @@ namespace Battle
         public List<BattleSkill> KnownSkills=new List<BattleSkill>();
         public List<BattleCommand> KnownCommands = new List<BattleCommand>();
         public Element element = Element.None;
-        public List<Status> Statuses;
+        public List<Status> Statuses=new List<Status>();
         [HideInInspector]public Ship[] Enemies;
         public Ship[] Allies;
         public Vector3 DefaultRot;

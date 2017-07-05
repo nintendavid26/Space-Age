@@ -41,7 +41,7 @@ public class SurvivalShopUI : MonoBehaviour {
         }
         else if (n == 1) //Equipment
         {
-            CurrentMenu = SkillMenu;
+            CurrentMenu = EquipmentMenu;
         }
         else if (n == 2) //Skills
         {

@@ -19,12 +19,17 @@ public class RepairShop : ShopMenu{
 
     public override void Close()
     {
-        throw new NotImplementedException();
+        gameObject.SetActive(false);
     }
 
     public override void initialize()
     {
-        throw new NotImplementedException();
+        gameObject.SetActive(true);
+        Ship1Name.text = PlayerShip.Player.Name;
+        Ship2Name.text = PlayerShip.Player.Allies[1].Name;
+        Ship3Name.text = PlayerShip.Player.Allies[2].Name;
+
+        UpdateButtons();
     }
 
     public override void Open()
@@ -32,13 +37,21 @@ public class RepairShop : ShopMenu{
         throw new NotImplementedException();
     }
 
-    public void Heal(PlayerShip ship)
+    public void Heal(PlayerShip ship,int cost)
     {
-
+        if (PlayerShip.Money < cost) { return; }
+        Debug.Log("Heal " + ship.Name);
+        ship.stats["Health"].Base = ship.stats["MaxHealth"].Base;
+        PlayerShip.Money -= cost;
+        UpdateButtons();
     }
-    public void Refuel(PlayerShip ship)
+    public void Refuel(PlayerShip ship,int cost)
     {
-
+        if (PlayerShip.Money < cost) { return; }
+        Debug.Log("Refuel " + ship.Name);
+        ship.stats["Fuel"].Base = ship.stats["MaxFuel"].Base;
+        PlayerShip.Money -= cost;
+        UpdateButtons();
     }
 
     public void UpdateButtons()
@@ -48,10 +61,53 @@ public class RepairShop : ShopMenu{
         HP=Missing*Level*1.1
         Fuel=Missing*Level*1.1
         Remove Status=Level*10.1
-        Revive=Level*100.1
+        Revive=500+Level*10.1
         */
+        #region Ship1
+        PlayerShip ship = PlayerShip.Player;
+        if (ship.stats["Health"].Base <ship.stats["MaxHealth"].Base)
+        {
+            Ship1Heal.gameObject.SetActive(true);
+            int hp = ship.stats["Health"].Base;
+            int max = ship.stats["MaxHealth"].Base;
+            int missing = max - hp;
+            int lvl = ship.stats["Level"].Base;
+            int cost = (int)(missing * lvl * 1.1);
+            Ship1Heal.GetComponentInChildren<Text>().text = "HP " + hp + "/" + max +
+                "\nRestore " + cost + "$";
+            Ship1Heal.onClick.RemoveAllListeners();
+            Ship1Heal.onClick.AddListener(delegate { Heal(ship,cost); });
+        }
+        else
+        {
+            Ship1Heal.gameObject.SetActive(false);
+        }
+        if (ship.stats["Fuel"].Base < ship.stats["MaxFuel"].Base)
+        {
+            Ship1Refuel.gameObject.SetActive(true);
+            int hp = ship.stats["Fuel"].Base;
+            int max = ship.stats["MaxFuel"].Base;
+            int missing = max - hp;
+            int lvl = ship.stats["Level"].Base;
+            int cost = (int)(missing * lvl * 1.1);
+            Ship1Refuel.GetComponentInChildren<Text>().text = "Fuel " + hp + "/" + max +
+                "\nRefuel " + cost + "$";
+            Ship1Refuel.onClick.RemoveAllListeners();
+            Ship1Refuel.onClick.AddListener(delegate { Refuel(ship,cost); });
+        }
+        else
+        {
+            Ship1Refuel.gameObject.SetActive(false);
+        }
+        if (ship.Statuses.Count>0) {
 
+        }
+        else
+        {
+            Ship1Repair.gameObject.SetActive(false);
+        }
 
+        #endregion
 
 
     }
