@@ -130,8 +130,7 @@ namespace Overworld
         public void UpdateUI()
         {
             UI.FuelText.text = "Fuel " + ship.stats["Fuel",false] + "/" + ship.stats["MaxFuel",false];
-            UI.Fuel.fillAmount = (float)ship.stats["Fuel",false] / ship.stats["Fuel",false];
-            UI.Money.text = "$" + Money;
+            UI.Fuel.fillAmount = (float)ship.stats["Fuel",false] / ship.stats["Fuel",false];    
         }
 
     }

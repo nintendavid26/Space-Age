@@ -17,6 +17,8 @@ namespace Battle
         public List<TargetUI> curTargets = new List<TargetUI>();
         public Button Back;
         public SkillContainer skillContainer;
+        public RewardsScreen rewardScreen;
+        public ItemsContainer itemContainer;
 
         PlayerShip ship { get { return (PlayerShip)BattleController.Controller.CurrentShip; } }
 
@@ -34,6 +36,7 @@ namespace Battle
             CommandsContainer.gameObject.SetActive(true);
             ResetFunctions(Attack,OnAttackPressed);
             ResetFunctions(Skill, OnSkillPressed);
+            ResetFunctions(Item, OnItemsPressed);
             ResetFunctions(Run,S,OnFleePressed);
         }
 
@@ -62,12 +65,25 @@ namespace Battle
             
         }
 
+        public void OnItemsPressed()
+        {
+            if (PlayerShip.Items.Count > 0)
+            {
+                itemContainer.gameObject.SetActive(true);
+                CommandsContainer.gameObject.SetActive(false);
+                itemContainer.Initialize(ship);
+            }
+
+        }
+
         public void OnSkillPressed()
         {
-            skillContainer.gameObject.SetActive(true);
-            CommandsContainer.gameObject.SetActive(false);
-            skillContainer.Initialize(ship);
-
+            if (ship.AvailableSkills.Count > 0)
+            {
+                skillContainer.gameObject.SetActive(true);
+                CommandsContainer.gameObject.SetActive(false);
+                skillContainer.Initialize(ship);
+            }
 
         }
 

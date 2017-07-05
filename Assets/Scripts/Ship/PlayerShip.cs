@@ -8,28 +8,26 @@ namespace Battle
 {
     public class PlayerShip : Ship
     {
-
+        //All allies share items so it makes sense for this to be static
+        public static Dictionary<string, int> Items = new Dictionary<string, int>();
+        public static int Money=100;
+        public List<string> ItemStrings;
         public static PlayerShip Player;
         public SkillCategory SkillTree;
         public int MaxSkills;
-        public List<BattleSkill> CurrentSkills;
+        [HideInInspector]public List<BattleSkill> AvailableSkills;
 
         public override void Start()
         {
+            
             base.Start();
-            Player = this;
-            CurrentSkills = new List<BattleSkill>( KnownSkills);
-            UpdateSkillTree();
-        }
-        void UpdateSkillTree()
-        {
-            List<SkillCollectionBase> SkillTypes = SkillTree.GetRootSkillCollections();
-            foreach(SkillCollectionBase scb in SkillTypes)
+            foreach (string item in ItemStrings)
             {
-
+                GetItem(item);
             }
+            if (Player == null) { Player = this; }
+            AvailableSkills = new List<BattleSkill>( KnownSkills);
         }
-
         public override void GetFuel(int amnt)
         {
             base.GetFuel(amnt);
@@ -60,6 +58,7 @@ namespace Battle
             }
             else
             {
+                Debug.Log(bc.ValidTargets(this));
                 BattleUI.UI.MakeTargets(bc.ValidTargets(this),BattleController.Controller.SelectedCommand);
                 yield return new WaitUntil(() => BattleController.Controller.SelectedTarget != null);
             }
@@ -76,6 +75,26 @@ namespace Battle
         public override void Die()
         {
             base.Die();//TODO Add stuff
+        }
+
+        public static void GetItem(string I, int amnt = 1)
+        {
+            if (Items.ContainsKey(I))
+            {
+                Items[I] += amnt;
+            }
+            else
+            {
+                Items.Add(I, amnt);
+            }
+        }
+        public static int GetItemAmt(string item)
+        {
+            if (Items.ContainsKey(item))
+            {
+                return Items[item];
+            }
+            return 0;
         }
     }
 }

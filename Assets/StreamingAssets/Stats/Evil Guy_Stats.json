@@ -12,58 +12,106 @@
     ],
     "StatList": [
         {
+            "Particles": {
+                "instanceID": 0
+            },
             "Name": "Health",
             "Base": 100,
-            "Modified": 100,
-            "Curve": []
+            "Curve": [],
+            "ship": {
+                "instanceID": 0
+            }
         },
         {
+            "Particles": {
+                "instanceID": 0
+            },
             "Name": "MaxHealth",
             "Base": 100,
-            "Modified": 100,
-            "Curve": []
+            "Curve": [],
+            "ship": {
+                "instanceID": 0
+            }
         },
         {
+            "Particles": {
+                "instanceID": 0
+            },
             "Name": "Fuel",
             "Base": 100,
-            "Modified": 100,
-            "Curve": []
+            "Curve": [],
+            "ship": {
+                "instanceID": 0
+            }
         },
         {
+            "Particles": {
+                "instanceID": 0
+            },
             "Name": "MaxFuel",
             "Base": 100,
-            "Modified": 100,
-            "Curve": []
+            "Curve": [],
+            "ship": {
+                "instanceID": 0
+            }
         },
         {
+            "Particles": {
+                "instanceID": 0
+            },
             "Name": "Atk",
             "Base": 15,
-            "Modified": 15,
-            "Curve": []
+            "Curve": [],
+            "ship": {
+                "instanceID": 0
+            }
         },
         {
+            "Particles": {
+                "instanceID": 0
+            },
             "Name": "Def",
             "Base": 10,
-            "Modified": 10,
-            "Curve": []
+            "Curve": [],
+            "ship": {
+                "instanceID": 0
+            }
         },
         {
+            "Particles": {
+                "instanceID": 0
+            },
             "Name": "Speed",
             "Base": 10,
-            "Modified": 10,
-            "Curve": []
+            "Curve": [],
+            "ship": {
+                "instanceID": 0
+            }
         },
         {
+            "Particles": {
+                "instanceID": 0
+            },
             "Name": "Luck",
             "Base": 10,
-            "Modified": 10,
-            "Curve": []
+            "Curve": [],
+            "ship": {
+                "instanceID": 0
+            }
         },
         {
+            "Particles": {
+                "instanceID": 0
+            },
             "Name": "Level",
             "Base": 1,
-            "Modified": 1,
-            "Curve": []
+            "Curve": [],
+            "ship": {
+                "instanceID": 0
+            }
         }
-    ]
+    ],
+    "ship": {
+        "instanceID": 0
+    }
 }

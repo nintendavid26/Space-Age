@@ -15,7 +15,7 @@ namespace Battle
         {
             public int ExpReward;
             public int MoneyReward;
-            public string Reward;
+            public string Item;
         }
         public Rewards reward;
         public override void Start()

@@ -1,0 +1,11 @@
+{
+    "Name": "Big First Aid",
+    "Description": "Restore 100 HP",
+    "Cost": 80,
+    "Power": 100,
+    "Stat": "",
+    "BuffDuration": 0,
+    "TargetAllies": true,
+    "useType": 0,
+    "effectType": 0
+}

@@ -14,22 +14,20 @@ namespace Battle
 
         public string Name;
         public int MaxItems;//Total or types?
-        public Dictionary<string, int> Items;
         public Character Pilot;
 
         //TODO Change inspector so that skills can only be added from a predetermined list
-        public List<string> SkillStrings;
 
-        [HideInInspector]public List<BattleSkill> KnownSkills=new List<BattleSkill>();
-        [HideInInspector]public List<BattleCommand> KnownCommands = new List<BattleCommand>();
+
+        public List<BattleSkill> KnownSkills=new List<BattleSkill>();
+        public List<BattleCommand> KnownCommands = new List<BattleCommand>();
         public Element element = Element.None;
         public List<Status> Statuses;
         [HideInInspector]public Ship[] Enemies;
         public Ship[] Allies;
         public Vector3 DefaultRot;
-        // Use this for initialization
+        [HideInInspector]public List<string> SkillStrings;
 
-        // Update is called once per frame
         public abstract IEnumerator GetCommand();
         public abstract IEnumerator GetTarget(BattleCommand bc);
         public bool Alive() { return stats["Health",false] > 0; }
@@ -37,18 +35,21 @@ namespace Battle
 
         public virtual void Start()
         {
+            Stats tempStats=stats;
             foreach(string s in SkillStrings)
             {
                 KnownSkills.Add(BattleSkill.Skills[s]);
                 KnownCommands.Add(BattleSkill.Skills[s]);
             }
             FromJSON();
-            stats.FromJSON(this);
+            
+            stats=tempStats;
             stats.SetShip(this);
         }
 
         public void Heal(int amnt)
         {
+            this.PlaySound("Heal");
             stats.Heal(amnt);
         }
 
@@ -115,17 +116,7 @@ namespace Battle
             Debug.Log("LUA: "+s);
         }
 
-        public void GetItem(Item I,int amnt=1)
-        {
-            if (Items.ContainsKey(I.Name))
-            {
-                Items[I.Name] += amnt;
-            }
-            else
-            {
-                Items.Add(I.Name, amnt);
-            }
-        }
+        
 
         public delegate IEnumerator EffectAnimation(Ship S);
 
@@ -187,6 +178,7 @@ namespace Battle
             */
             
         }
+
 
     }
 }

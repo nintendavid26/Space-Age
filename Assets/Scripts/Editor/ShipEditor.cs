@@ -1,6 +1,8 @@
 ﻿using Battle;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
@@ -10,13 +12,19 @@ using UnityEngine;
 public class ShipEditor : Editor {
 
     public bool shouldShowStats=true;
+    public bool shouldShowSkills = true;
     public Ship selected;
     public bool Loaded = false;
+    public string[] Allskills;
+    int prev;
     public override void OnInspectorGUI()
     {
         DrawDefaultInspector();
         Ship ship = (Ship)target;
-        
+        if (ship.GetComponent<PlayerShip>())
+        {
+            PlayerShip.Money = EditorGUILayout.IntField("Money", PlayerShip.Money);
+        }
         
         shouldShowStats = EditorGUILayout.Toggle("Stats",shouldShowStats);
         if (ship.stats==null||ship.stats.stats.Count==0)
@@ -27,7 +35,11 @@ public class ShipEditor : Editor {
         {
             ShowStats(ship);
         }
-        
+        shouldShowSkills = EditorGUILayout.Toggle("Skills", shouldShowSkills);
+        if (shouldShowSkills)
+        {
+            ShowSkills(ship);
+        }
     }
 
     public void ShowStats(Ship S)
@@ -83,4 +95,41 @@ public class ShipEditor : Editor {
         EditorGUILayout.EndHorizontal();
     }
 
+
+    public void ShowSkills(Ship s)
+    {
+        for (int i=0;i<s.SkillStrings.Count;i++)
+        {
+            EditorGUILayout.BeginHorizontal();
+            if (GUILayout.Button("-")) {
+                s.SkillStrings.RemoveAt(i);
+            }
+            EditorGUILayout.LabelField(s.SkillStrings[i]);
+            GUILayout.FlexibleSpace();
+            EditorGUILayout.EndHorizontal();
+        }
+        if (Allskills == null) { Allskills = GetAllSkills(); }
+        if (Allskills.Length == 0) { Allskills = GetAllSkills(); }
+        int j = prev;
+        prev=EditorGUILayout.Popup("Add Skill",j,Allskills);
+        if(j!=prev && !s.SkillStrings.Contains(Allskills[prev]))
+        {
+            s.SkillStrings.Add(Allskills[prev]);
+        }
+    }
+
+    public string[] GetAllSkills()
+    {
+        List<string> skills = new List<string>();
+        DirectoryInfo d = new DirectoryInfo(Application.streamingAssetsPath + "/Skills/JSON/");
+        FileInfo[] f = d.GetFiles();
+        foreach (FileInfo file in f)
+        {
+            if (file.Name.Split('.').Last() == "json")
+            {
+                skills.Add(file.Name.Split('.')[0]);
+            }
+        }
+        return skills.OrderBy(x=>x).ToArray();
+    }
 }

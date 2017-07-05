@@ -1,0 +1,14 @@
+{
+    "Name": "Kill Shot",
+    "Description": "If this kills the enemy, gain extra money",
+    "Cost": 20,
+    "User": {
+        "instanceID": 0
+    },
+    "SingleTarget": true,
+    "target": 2,
+    "e": 4,
+    "Auto": false,
+    "Power": 20,
+    "Category": ""
+}

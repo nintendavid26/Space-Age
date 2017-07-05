@@ -19,10 +19,10 @@ public class SkillContainer : MonoBehaviour
     {
         Ship = ship;
         selected = -1;
-        for (int i = 0; i < ship.CurrentSkills.Count; i++)
+        for (int i = 0; i < ship.AvailableSkills.Count; i++)
         {
             int j = i;
-            BattleSkill skill = ship.CurrentSkills[i];
+            BattleSkill skill = ship.AvailableSkills[i];
             if (skill.CanUse(ship))
             {
                 SkillButton B = Instantiate(button, grid.transform).GetComponent<SkillButton>();
@@ -40,7 +40,7 @@ public class SkillContainer : MonoBehaviour
 
     public void OnClick(int i)
     {
-        BattleController.Controller.SelectedCommand = Ship.CurrentSkills[i];
+        BattleController.Controller.SelectedCommand = Ship.AvailableSkills[i];
         foreach (SkillButton B in Buttons)
         {
             Destroy(B.gameObject);

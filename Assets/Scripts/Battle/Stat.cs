@@ -94,7 +94,6 @@ public class Stat {
             Buffs = new List<Buff>();
         }
         int prevNetPos = PositiveBuff();
-        Debug.Log(ship);
         Buff buff = new Buff(this, amnt, Duration, ship);
         Buffs.Add(buff);
         Particles=MakeParticles();

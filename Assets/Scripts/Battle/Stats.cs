@@ -27,6 +27,7 @@ public class Stats:System.Object {
     };
     public Ship ship;
 
+    public int Health, MaxHealth, Fuel, MaxFuel, Atk, Def, Speed, Luck;
 
 
     public void Remove(string s)

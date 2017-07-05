@@ -1,0 +1,11 @@
+{
+    "Name": "First Aid",
+    "Description": "Recovers 10 HP",
+    "Cost": 10,
+    "Power": 10,
+    "Stat": "",
+    "BuffDuration": 0,
+    "TargetAllies": true,
+    "useType": 0,
+    "effectType": 0
+}

@@ -34,6 +34,8 @@ namespace Battle
         public bool Auto;
         public bool TurnStarted;
         public GameObject CurrentLight;
+        public Vector3 prevPos;
+        public Vector3 prevCam;
 
         public List<EnemyShip.Rewards> Rewards = new List<EnemyShip.Rewards>();
 
@@ -48,6 +50,8 @@ namespace Battle
 
         public void StartBattle(EnemyShip[] Enemies, Initiative i)
         {
+            prevPos = PlayerShipMovement.Player.transform.position;
+            prevCam = Camera.main.transform.position;
             switch (i)
             {
                 case Initiative.Player:
@@ -152,7 +156,7 @@ namespace Battle
 
         private void BringUpRewardsScreen()
         {
-            throw new NotImplementedException();
+            BattleUI.UI.rewardScreen.Initialize(Rewards);
         }
 
         bool Alive(Ship[] Ships)
@@ -223,7 +227,13 @@ namespace Battle
         }
         public IEnumerator TakeTurn(Ship s)
         {
-
+            /*
+            TODO Add a back button
+            With the current implementation it gets data
+            Then uses that data to wait for more data
+            A better way would be for the functions to chain into each other
+            This will probably be alot of refactoring
+            */
             CurrentShip = s;
             yield return StartCoroutine(s.StartTurn());
             StartCoroutine(CurrentShip.GetCommand());
@@ -231,12 +241,13 @@ namespace Battle
             StartCoroutine(CurrentShip.GetTarget(SelectedCommand));
             yield return new WaitUntil(() => SelectedTarget != null); //I know this is kinda dumb
             yield return new WaitUntil(() => SelectedTarget.Length > 0); //will fix later
-
             StartCoroutine(SelectedCommand.Do(CurrentShip, SelectedTarget));
             yield return new WaitUntil(() => !AnimationPlaying);
             SelectedCommand = null;
             SelectedTarget = null;
-            if (s.GetComponent<EnemyShip>() != null) { yield return new WaitForSeconds(0.5f); }//TODO Make this be handled within 
+            if (s.GetComponent<EnemyShip>() != null) {
+                yield return new WaitForSeconds(0.5f);//TODO Make this be handled within enemyShip
+            }
             yield return StartCoroutine(s.EndTurn());
         }
 
@@ -262,11 +273,21 @@ namespace Battle
     
         }
 
+        public void Leave()
+        {
+            OverWorldUI.UI.gameObject.SetActive(true);
+            BattleUI.UI.gameObject.SetActive(false);
+            PlayerShipMovement.Player.transform.position = prevPos;
+            PlayerShipMovement.Player.enabled = true;
+            Camera.main.transform.position = prevCam;
+            Music.ChangeSong("OverWorld");
+        }
+
 
         public void SetCurrentLight(Ship S)
         {
             CurrentLight.transform.position = S.transform.position;
-            CurrentLight.transform.position=new Vector3(CurrentLight.transform.position.x, CurrentLight.transform.position.y+2, CurrentLight.transform.position.z);
+            CurrentLight.transform.position=new Vector3(CurrentLight.transform.position.x, CurrentLight.transform.position.y+2,CurrentLight.transform.position.z);
         }
 
     }

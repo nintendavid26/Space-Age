@@ -15,7 +15,7 @@ public class SkillButton : MonoBehaviour,IPointerEnterHandler {
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        BattleSkill skill = Container.Ship.CurrentSkills[i];
+        BattleSkill skill = Container.Ship.AvailableSkills[i];
         Container.Description.text = skill.Name + "  Fuel:" + skill.Cost + " " + skill.Description;
     }
 

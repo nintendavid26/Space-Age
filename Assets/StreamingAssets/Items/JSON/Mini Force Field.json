@@ -1,0 +1,11 @@
+{
+    "Name": "Mini Force Field",
+    "Description": "Slightly raise defense for 3 turns",
+    "Cost": 50,
+    "Power": 1,
+    "Stat": "Def",
+    "BuffDuration": 3,
+    "TargetAllies": false,
+    "useType": 0,
+    "effectType": 1
+}
