@@ -10,5 +10,7 @@
     "e": 4,
     "Auto": false,
     "Power": 20,
-    "Category": ""
+    "Category": "",
+    "UnlockCost": 30,
+    "UnlockConditions": ""
 }

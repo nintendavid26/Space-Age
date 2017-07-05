@@ -10,5 +10,7 @@
     "e": 2,
     "Auto": false,
     "Power": 10,
-    "Category": "Electric"
+    "Category": "Electric",
+    "UnlockCost": 10,
+    "UnlockConditions": ""
 }

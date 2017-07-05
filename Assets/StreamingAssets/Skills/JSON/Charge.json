@@ -10,5 +10,7 @@
     "e": 4,
     "Auto": false,
     "Power": 0,
-    "Category": "Lazer"
+    "Category": "Lazer",
+    "UnlockCost": 30,
+    "UnlockConditions": ""
 }

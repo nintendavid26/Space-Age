@@ -56,6 +56,9 @@ public class SkillEditor: EditorWindow {
         Skill.Name=EditorGUILayout.TextField("Name", Skill.Name);
         Skill.Description = EditorGUILayout.TextField("Description", Skill.Description);
         Skill.Category = EditorGUILayout.TextField("Category", Skill.Category);
+        Skill.UnlockCost = EditorGUILayout.IntField("UnlockCost", Skill.UnlockCost);
+        EditorGUILayout.LabelField("Unlock Conditions");
+        Skill.UnlockConditions=EditorGUILayout.TextArea(Skill.UnlockConditions);
         Skill.Auto = EditorGUILayout.Toggle("Auto",Skill.Auto);
         if (!Skill.Auto)
         {

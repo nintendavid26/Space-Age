@@ -15,10 +15,6 @@ namespace Battle
         public string Name;
         public int MaxItems;//Total or types?
         public Character Pilot;
-
-        //TODO Change inspector so that skills can only be added from a predetermined list
-
-
         public List<BattleSkill> KnownSkills=new List<BattleSkill>();
         public List<BattleCommand> KnownCommands = new List<BattleCommand>();
         public Element element = Element.None;

@@ -18,6 +18,8 @@ namespace Battle
         public bool Auto;
         public int Power;
         public string Category;
+        public int UnlockCost=0;
+        public string UnlockConditions;
 
         public override Ship[] GetTarget(Ship User)
         {
@@ -93,5 +95,12 @@ namespace Battle
             File.WriteAllText(Application.streamingAssetsPath + "/Skills/JSON/" + Name + ".json", json);
         }
 
+        public bool CanUnlock(Ship s)
+        {
+            return true;
+        }
+
     }
+
+
 }

@@ -10,5 +10,7 @@
     "e": 1,
     "Auto": false,
     "Power": 10,
-    "Category": "Fire"
+    "Category": "Fire",
+    "UnlockCost": 10,
+    "UnlockConditions": ""
 }
